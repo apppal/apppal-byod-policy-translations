@@ -1,23 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says 'it-department' can-say inf Employee:U canUse(Device:D).
 
 'it-department' says Employee:User canUse(Handheld:Device)
@@ -35,40 +16,12 @@
 'it-department' says 'pocket-pc' isHandheld.
 'it-department' says 'smartphone' isHandheld.
 
-
-
-
-
-
-
-
-
-
 'company' says 'it-governance' can-say Device canConnectToNetwork('corporate-network')
   if Device hasMet('risk-assesment-policy').
-
-
-
-
-
 
 'company' says Device mustProhibitCollectAt(Location)
   if Device isPrivatelyOwned,
      Location isSecurityLevel('restricted').
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 'company' says Device canConnectToNetwork('company-network')
   if Device isApproved,
@@ -80,34 +33,10 @@
 'company' says 'it-department' can-act-as 'technical-personnel'.
 'company' says 'desktop-support' can-act-as 'technical-personnel'.
 
-
-
-
-
-
-
-
-
-
-
-
 'company' says 'it-department' can-say Device:X hasMet('mobile-handheld-device-policy').
 'company' says 'it-department' can-say Device:X hasMet('approved-device-policy').
 'company' says 'it-department' can-say App:A isInstallable.
 'company' says 'it-department' can-say App:A isNotInstallable.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 'company' says User can-say
   Device isLost
@@ -117,75 +46,23 @@
   if D isOwnedBy(User),
      D isLost.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says Device:D canCall(TelephoneNumber:X)
   where inCar(D) = true,
         usingHandsfree(D) = true.
 
-
-
-
-
-
-
-
-
 'company' says Device:D hasMet('password-policy')
   where passwordEnabled(D) = true.
-
-
-
 
 'company' says Device can-say Device isOwnedBy(X)
   if Device isOwnedBy(X).
 
 'company' says Device:D can-say D isOwnedBy(Company).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says Device:D mustDisable('wlan')
   where usingBattery() = true.
-  
+
 'company' says Device:D mustDisable('encryption')
   where usingBattery() = true.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 'company' says Device mustDisable('camera')
   if 'restricted-environment' isWhereIs(Device).
@@ -198,41 +75,14 @@
 'company' says Location:L isWhereIs(Device:D)
   where location(D, L) = true.
 
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says Device mustBeUpdated
   if Device isRunningVersion(Version)
   where lth(deviceVersion(Device), Version) = true.
 
 'company' says 'it-department' can-say Device:D mustRun(Version:V).
 
-
-
-
-
-
-
 'company' says 'device' mustDisable('file-sharing').
 'company' says 'device' mustDisable('ftp-client').
-
-
-
-
-
-
-
-
-
 
 'company' says App isNotInstallable
   if App isAssociatedWith('mp3'). 
@@ -240,87 +90,26 @@
 'company' says App isNotInstallable
   if App isAssociatedWith('mimetype-audio-mpeg'). 
 
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says App hasMet('unsigned-applications-policy')
   if App isSignedBy(X).
 
-
-
-
-
-
-
 'company' says 'it-department' can-say Certificate:C isValid. 
-
-
-
-
-
-
-
 
 'company' says 'av-software' canConnectToServer(URL:X)
   where connectedToWifi() = true.
 
 'company' says 'av-software' canScan(Device:D).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says Device:D canEnable('bluetooth')
   where geq(bluetoothVersion(), '2-1') = true.
 
 'company' says 'information-security-manager' can-say Device canEnable('bluetooth').
-
-
-
-
-
-
-
-
-
 
 'company' says Device1 can-say Device1 hasPairedWith(Device2, PIN:P)
   if Device1 canPair(Device2).
 
 'company' says Device:D1 canPair(Device:D2)
   where location(D1, 'restricted') = false.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 'company' says Device1 canSendTo(Device2, Data:X)
   if Device1 hasPairedWith(Device2, PIN),
@@ -329,80 +118,21 @@
 'company' says Device1 can-say Device1 hasPairedWith(Device2, PIN)
   if Device2 hasStartedPairing(Device1, PIN).
 
-
-
-
-
-
-
-
-
 'company' says 'is-staff' canMonitor(Device:D, Feature:X)
   where ! X = 'conversation'.
 
-
-
-
-
-
-
-
 'company' says Device mustDisable('irda')
   if 'bluetooth' isOwnedBy(Device).
-
-
-
-
-
-
-
 
 'company' says 'device' cannotStore(Doc) if Doc isSecurityLevel('secret').
 'company' says 'device' cannotStore(Doc) if Doc isSecurityLevel('strict-confidential').
 'company' says 'device' cannotStore(Doc) if Doc isSecurityLevel('confidential').
 'company' says 'device' cannotStore(Doc) if Doc isSecurityLevel('internal').
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says Encrypted:Device canStore(Confidential:Doc).
-
-
-
-
-
-
-
-
-
-
 
 'company' says 'internal' canStore(File:Doc).
 'company' says 'external' cannotStore(File:Doc).
-
-
-
-
-
-
 
 'company' says Device:D canInstall(App)
   if App isEncrypting,
@@ -411,47 +141,18 @@
 'company' says Device canInstall(App)
   if App isInstallable,
      Device mustEnable('mmc-encryption').
-      
+
 'company' says Device:D can-say
   D mustEnable('mmc-encryption').
-
-
-
-
-
-
-
-
-
-
-
 
 'company' says 'it-department' can-say Device canConnectToNetwork('internal')
   if Device isActivated.
 
 'company' says 'it-department' can-say Device:D isActivated.
 
-
-
-
-
-
-
-
-
-
 'company' says Device:D mustDisable('file-sharing').
 'company' says Device:D canEnable('file-sharing')
   if 'file-sharing' mustEnable('authentication').
-
-
-
-
-
-
-
-
-
 
 'company' says 'device' mustDisable('wifi').
 
@@ -461,50 +162,12 @@
 'company' says Device:D canConnectToAP(AP:X)
   if X canAuthenticateWith('wpa').
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'company' says PPG:PPG can-say File:F isProvisioningFile
   if PPG isApproved.
 'company' says 'security-staff' can-say PPG:PPG isApproved.
 
-
-
-
-
-
-
-
-
-
 'company' says 'it-department' can-say Device:D isUpdatedBy(Update:U).
 'company' says 'operator' can-say Server:S isUpdatedBy(Update:U).
-
-
-
-
-
-
-
-
-
 
 'company' says User canUse(Device) 
   if Device isOwnedBy(User),
@@ -516,18 +179,5 @@
 'company' says Employee:U  mustAcknowledged('acceptable-use').
 'company' says Employee:U  mustAcknowledged('ecommerce-security').
 
-
-
-
-
-
-
 'company' says Device:D mustDisable('attachment-download').
-
-
-
-
-
-
-
 

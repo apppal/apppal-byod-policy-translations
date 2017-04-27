@@ -1,81 +1,19 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'department' says 'technician' canMonitor(Device)
   if Device mustBeProvisioned.  
 
 'department' says 'technician' canMonitor(Device)
   if Device mustBeInvestigated.  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'department' says Employee:E can-say
   E hasAcknowledged('acceptable-usage').
 
 'department' says Employee:E mustAcknowledged('acceptable-usage').
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 'department' says Device:D canAccess('email').
 'department' says Device:D canAccess('calendars').
 'department' says Device:D canAccess('contacts').
 'department' says Device:D canAccess('documents').
-
-
-
-
-
-
-
-
-
-
 
 'department' says Device mustEnable('hands-free')
   if Device isInCar. 
@@ -89,37 +27,13 @@
 'department' says Device mustDisable('email')
   if Device isInCar. 
 
-
-
-
-
-
-
-
 'department' says IPhone3GS:Device isSupported.
 'department' says IPhone4:Device isSupported.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 'department' says Employee:E can-say
   E hasAcknowledged('internet-unreliable').
 
 'department' says Employee:E mustAcknowledged('internet-unreliable').
-
-
-
-
 
 'department' says Device mustInstall(App)
   if Device mustBeProvisioned,
@@ -128,20 +42,9 @@
 'department' says 'it-department' can-say
   App:A isStandardInstall.
 
-
-
-
-
-
-
-
 'department' says Device:D mustEnable('password').
 'department' says Device canConnectToNetwork
   if Device mustEnable('password').
-
-
-
-
 
 'department' says String:Password isAcceptable
   if Password isCreated(Date)
@@ -154,43 +57,17 @@
   Password:P isCreated(Date:D)
      where geq(D, delegatedAssertionDate()) = true.
 
-
-
-
-
-
-
-
-
 'department' says Device:D mustLock
   where geq(idleTime(), '300') = true.
-
-
-
-
 
 'department' says Device cannotConnectToNetwork
   if Device isRooted.
 
-
-
-
-
 'department' says Device cannotConnectToNetwork
   if Device isNotSupported.
 
-
-
-
-
-
 'department' says Device cannotConnectToNetwork
   if Device isNotProvisioned.
-
-
-
-
-
 
 'department' says Device canReadData(X)
   if Device isOwnedBy(User),
@@ -199,47 +76,21 @@
 'department' says 'it-department' can-say
   Employee:U canReadData(Data:D).
 
-
-
-
-
-
 'department' says Device mustWipe
   if Device isLost.
 
 'department' says Device mustWipe
   if Device isOwnedBy(User),
      User isNotEmployed. 
-     
-'department' says 'it-department' can-say
-  Device:D mustWipe.
-
-
-
-
-
-
-
-
-
-
-
-
 
 'department' says 'it-department' can-say
   Device:D mustWipe.
 
-
-
-
+'department' says 'it-department' can-say
+  Device:D mustWipe.
 
 'department' says 'company' can-say Device:D isDisconnected.
 'department' says 'company' can-say Device:D mustDisable(Feature:X).
-
-
-
-
-
 
 'department' says Employee mustInform('company', 'device-lost')
   if Device isOwnedBy(Employee),
@@ -253,49 +104,21 @@
   Device isLost
   if Device isOwnedBy(Employee).
 
-
-
-
-
-
 'department' says Employee:E can-say
   E hasAcknowledged('ethical-policy').
 
 'department' says Employee:E mustAcknowledged('ethical-policy').
-
-
-
-
-
 
 'department' says Employee:E can-say
   E hasAcknowledged('financial-liabiliy-policy').
 
 'department' says Employee:E mustAcknowledged('financial-liabiliy-policy').
 
-
-
-
-
-
 'department' says Employee:E can-say 
   E hasAcknowledged('liabiliy-policy').
 
 'department' says Employee:E mustAcknowledged('liabiliy-policy').
 
-
-
-
-
-
-
-
-
-
 'department' says Employee:U mustAcknowledge('this-policy')
   if Device isOwnedBy(U).  
-
-
-
-
 

@@ -1,51 +1,8 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'records-management' says BA can-say
   Device hasMet('higher-requirements')
   if Device isOwnedBy(Employee),
      Employee hasDepartment(BA).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 'records-management' says Device hasMet('information-policy')
   if Employee has(Device),
@@ -59,21 +16,6 @@
      Device hasMet('low-risk-any-device-policy'),
      Device hasMet('low-risk-specific-device-policy').
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'records-management' says Device hasMet('low-risk-any-device-policy')
   if Device hasPassword(Password),
      Password isStrongPassword,
@@ -81,35 +23,13 @@
      Device canBackupTo(Server),
      Server isOwnedBy('university')
   where leq(N, '180') = true.
-  
+
 'records-management' says Device hasMet('high-risk-any-device-policy')
   if Device hasMet('low-risk-any-device-policy'),
      Device isOwnedBy(Employee),
      Employee mustAcknowledged('erase-on-loss'),
      Employee hasAcknowledged('erase-on-loss'),
      Device isEncrypted.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 'records-management' says SmartPhone:Device hasMet('low-risk-specific-device-policy')
   if Device hasFeature('remote-wipe').
@@ -118,43 +38,14 @@
   if Device hasMet('low-risk-specific-device-policy'),
      Device cannotSideload.
 
-
-
-
-
-
-
-
-
 'records-management' says Computer:Device hasMet('low-risk-specific-device-policy')
   if Device has(Antivirus:AV)
   where update(AV) = true.
 
-
-
-
-
-
-
 'records-management' says Device:D mustDisable('automatic-connection').
-
-
-
-
-
-
-
-
 
 'records-management' says Employee:U can-say
   U hasAcknowledged('compliance-policy').
 
 'records-management' says Employee:U mustAcknowledged('compliance-policy').
-
-
-
-
-
-
-
 
