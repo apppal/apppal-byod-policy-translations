@@ -1,0 +1,812 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% 'nhs-trust' says Staff:S mustAcknowledged('acceptable-use').
+% 'nhs-trust' says Staff:S mustAcknowledged('charger-policy').
+% 'nhs-trust' says Staff:S mustAcknowledged('charging-policy').
+% 'nhs-trust' says Staff:S mustAcknowledged('confidentiality-guidelines').
+% 'nhs-trust' says Staff:S mustAcknowledged('damage-policy').
+% 'nhs-trust' says Staff:S mustAcknowledged('data-loss-policy').
+% 'nhs-trust' says Staff:S mustAcknowledged('driving-policy').
+% 'nhs-trust' says Staff:S mustAcknowledged('monthly-fee').
+% 'nhs-trust' says Staff:S mustAcknowledged('personal-liability').
+% 'nhs-trust' says Staff:S mustAcknowledged('public-usage-policy').
+% 'nhs-trust' says Staff:S mustAcknowledged('usage-policy').
+% 'nhs-trust' says Staff:S mustAcknowledged('work-communication-policy').
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff isNeeding('Mobile')
+  if Staff isLoneWorking,
+     Staff isOutOfHoursWorking,
+     Staff isOutOfOfficeWorking.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff isNeeding('SmartMobile')
+  if Staff isNeeding('mobile'),
+     Staff hasMet('smart-mobile-requirements').
+
+'nhs-trust' says Staff hasMet('smart-mobile-requirements')
+  if Staff isNeeding('oooemail'),
+     Staff isNeeding('ooocalendar').
+
+'nhs-trust' says Staff hasMet('smart-mobile-requirements')
+  if Staff isNeeding('oooemail'),
+     Staff isNeeding('ooointernet').
+
+'nhs-trust' says Staff hasMet('smart-mobile-requirements')
+  if Staff isNeeding('ooocalendar'),
+     Staff isNeeding('ooointernet').
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says User canUse(Device)
+  if Device isOwnedBy(User),
+     User hasAcknowledged('personal-liability'),
+     User hasAcknowledged('confidentiality-guidelines').
+
+
+
+'nhs-trust' says User canUse(Device)
+  if Device isOwnedBy('nhs-trust'),
+     User hasAppliedFor('phone', Form),
+     Form isAuthorized.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff hasAppliedFor('phone', Form)
+  if Staff hasSubmitted(Form),
+     Form isReceived.
+
+'nhs-trust' says Form isAuthorized
+  if Staff hasAppliedFor('phone', Form),
+     FinanceDirector:F hasApproved(Form),
+     AssistantDirector:D hasApproved(Form),
+     D isManagerOf(Staff).
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say 
+  S hasAcknowledged('damage-policy').
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged('work-communication-policy').
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff can-say
+  Device isPersonalUse
+  if Device isOwnedBy(Staff).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'it-department' says Staff can-say
+  Device isLost
+  if Device isOwnedBy(Staff).
+
+'nhs-trust' says 'it-department' can-say
+  Device isActivated.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff can-say
+  Device isLinkedTo(MailAddr)
+  if Device isOwnedBy(Staff),
+     Staff hasEmail(MailAddr),
+     MailAddr isNHSMailAddr.
+
+
+
+
+
+
+
+
+
+
+
+    'nhs-trust' says 'nhsmail' can-say inf
+  Device mustWipe.
+
+'nhs-trust' says Staff can-say Device mustWipe
+  if Device isOwnedBy(Staff),
+     Device isLost.
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say 
+  S hasAcknowledged('data-loss-policy').
+
+
+
+
+
+
+
+
+
+'nhs-mail' says Device canConnectToServer('nhs-mail')
+  if Device hasFeature('encryption').
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff can-say
+  Device mustUpdatePassword
+  if Device isOwnedBy(Staff).
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged('charging-policy').
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged('charger-policy').
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged('usage-policy').
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says LineManager:X can-say
+  Staff hasMet('business-requirement')
+  if X isManagerOf(Staff).
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged(Policy:P).
+
+
+
+
+
+
+
+'nhs-trust' says 'it-department' canMonitor(Device)
+  if Device isOwnedBy('nhs-trust').
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff canUse(Device)
+  if Device isOwnedBy(Staff).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff can-say
+  Device isNoLongerRequired
+  if Device isOwnedBy(Staff).
+
+'nhs-trust' says Employee:S can-say
+  Device hasPassedOnTo(Employee:T)
+  if Device isOwnedBy(S),
+     S hasAppliedFor('phone-transfer', Form),
+     Form isReceived.
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says 'line-manager' can-say
+  Device hasBeenReturned.
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Manager isResponsibleFor(Device)
+  if Device isOwnedBy(Staff),
+     Manager isManagerOf(Staff).
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says 'it-department' can-say
+  'nhs-trust' hasDevice(Device:D).
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged('public-usage-policy').
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Staff canUseForPersonal(Device)
+  if Device isOwnedBy(Staff),
+     Device isOwnedBy('nhs-trust'),
+     Device isPersonalUse,
+     Staff hasAcknowledged('monthly-fee'),
+     Staff hasAcknowledged('acceptable-use').
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says 'it-department' canMonitor(Device)
+  if Device isOwnedBy('nhs-trust').
+
+'nhs-trust' says 'it-department' can-say
+  Device isUsedExcessively.
+
+'nhs-trust' says 'it-department' mustInform(Manager, 'excessive-use')
+  if Device isOwnedBy(Staff),
+     Device isUsedExcessively,
+     Manager isManagerOf(Staff).
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged('data-loss-policy').
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Device:D mustDisable(D)
+  where inCar(D) = true,
+        usingHandsFree(D) = false.
+
+
+
+
+
+
+
+
+'nhs-trust' says Employee:S can-say
+  S hasAcknowledged('driving-policy').
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Device canCall(TelephoneNumber:X)
+  if Device isOwnedBy('nhs-trust')
+  where nationalNumber(X) = true,
+        premiumNumber(X) = false.
+
+'nhs-trust' says Device canCall(TelephoneNumber:X)
+  if Device isOwnedBy(Staff),
+     Staff canDuring(From, To, 'make-international-calls')
+  where betweenDates(From, To) = true.
+
+'nhs-trust' says 'it-department' can-say
+  Staff canMakeInternationalCalls(From, To)
+  if Staff hasAppliedFor('international-calls', Form),
+     Manager hasApproved(Form).
+
+'nhs-trust' says Manager can-say inf
+Manager hasApproved('international-calls', App)
+  if Staff hasAppliedFor('international-calls', App),
+     Manager isManagerOf(Staff).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Device mustDisable('international-calls')
+  if Device isPersonalUse.
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Device canPhotograph(Patient)
+  if Device isEncrypted,
+     Patient isPhotographable.
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says 'clinician' can-say
+  Patient isPhotographable
+  if Patient hasConsentedTo('photography').
+
+'nhs-trust' says Patient can-say inf
+  Patient hasConsentedTo('photography')
+  if Patient canConsent.
+
+'nhs-trust' says 'clinician' can-say
+  Patient canConsent.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says App isInstallable
+  if App hasMet('clinical-use-case').
+'nhs-trust' says App isInstallable
+  if App hasMet('business-use-case').
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says 'cacpg' can-say
+  App hasMet('clinical-use-case').
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says 'mig' can-say
+  App hasMet('business-use-case').
+
+
+
+
+
+
+
+
+
+
+
+
+'nhs-trust' says App isInstallable
+  if App isDownloadable,
+     App hasMet('final-app-approval').
+
+'nhs-trust' says 'igc' can-say
+  App hasMet('final-app-approval').
+
+
+
+
+
+
+
+
+
+'nhs-trust' says Device canInstall(App)
+  if App isInstallable,
+     App isApprovedFor(Device).
+
+'nhs-trust' says Employee:Manager can-say
+  App:A isApprovedFor(Device)
+  if Manager isResponsibleFor(Device).
+
+
+
+
+
+
+
+
+'nhs-trust' says 'clinician' can-say
+  Treatment:T isJustifiedBy(String:Reason).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,193 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'user' says 'xyz-health-system' can-say 
+  Device:D mustSet(SecuritySetting:Opt, Value)
+  if Value isValueFor(Opt).
+
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('data-loss-policy').
+'user' says 'user' hasAcknowledged('data-loss-policy').
+'user' says 'xyz-health-system' can-say
+  Device mustWipe
+  if Device isOwnedBy('user').
+
+
+
+
+
+
+
+
+
+'user' says Device:D canBackupTo(Computer)
+  if Computer isOwnedBy('xyz-health-system').
+'user' says 'xyz-health-system' can-say
+  'xyz-health-system' hasDevice(Device:D).
+
+
+
+
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('data-loss-policy').
+'user' says 'user' hasAcknowledged('data-loss-policy').
+
+
+
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('rooting-policy').
+'user' says 'user' hasAcknowledged('rooting-policy').
+
+
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('internet-unreliable').
+'user' says 'user' hasAcknowledged('internet-unreliable').
+
+
+
+
+
+
+
+'user' says Device canConnectToAP(AP)
+  if Device isOwnedBy('user'),
+     Device isOwnedBy('xyz-health'),
+     AP isOwnedBy('xyz-health-system').
+
+
+
+
+
+
+'user' says Data canBeSentWith('MyXYZHealthSystem')
+  if Data isSecurityLevel('protected-health').
+
+'user' says Data canBeSentWith('e-secure')
+  if Data isSecurityLevel('business-sensitive').
+
+'user' says Data canBeSentWith('secure-ftp')
+  if Data isSecurityLevel('business-sensitive').
+
+
+
+
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('diagnostic-limitations').
+'user' says 'user' hasAcknowledged('diagnostic-limitations').
+'user' says App canStore(Data)
+  if Data isSecurityLevel('protected-health'),
+     App isApprovedFor(Device).
+
+'user' says 'xyz-health-system' can-say
+  App:A isApproved.
+
+
+
+
+
+
+
+'user' says 'xyz-health-system' can-say
+  Device mustWipe
+  if Device isOwnedBy('user').
+
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('activation-charge').
+'user' says 'user' hasAcknowledged('activation-charge').
+'department' says Device isActivated
+  if Device isOwnedBy(User),
+     User hasDepartment('department'),
+     Device hasActivationFee(Fee),
+     User hasPaid(Fee).
+
+
+
+
+
+
+'user' says 'user' mustInform('it-help-desk', 'device-lost')
+  if Device isOwnedBy('user'),
+     Device isLost.
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('remote-working-policy').
+'user' says 'user' hasAcknowledged('remote-working-policy').
+
+
+
+
+
+
+'xyz-health-system' says 'user' mustAcknowledged('penalty-conditions').
+'user' says 'user' hasAcknowledged('penalty-conditions').
+
+
+
+
+
+
+
+
+
+
